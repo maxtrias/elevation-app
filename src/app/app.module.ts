@@ -13,7 +13,12 @@ import { IndicatorAvgComponent } from './component/indicator-avg/indicator-avg.c
 import { IndicatorMaxComponent } from './component/indicator-max/indicator-max.component';
 
 @NgModule({
-  declarations: [AppComponent, ChartComponent, IndicatorAvgComponent, IndicatorMaxComponent],
+  declarations: [
+    AppComponent,
+    ChartComponent,
+    IndicatorAvgComponent,
+    IndicatorMaxComponent,
+  ],
   imports: [
     BrowserModule,
     HttpClientModule,

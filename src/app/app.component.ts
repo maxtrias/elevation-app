@@ -11,14 +11,13 @@ import { AppState } from './+state/app.state';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
-  @Select(AppState.getElevation) readonly elevation$: Observable<
-    { x: number; y: number }[]
-  >;
-  @Select(AppState.getElevationValues) readonly elevationValues$: Observable<
-    number[]
-  >;
+  @Select(AppState.getElevation)
+  readonly elevation$: Observable<{ x: number; y: number }[]>;
 
-  isLoading$$ = new BehaviorSubject(false);
+  @Select(AppState.getElevationValues)
+  readonly elevationValues$: Observable<number[]>;
+
+  readonly isLoading$$ = new BehaviorSubject(false);
 
   constructor(private store: Store) {}
 
