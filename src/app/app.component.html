@@ -15,4 +15,12 @@
   <div class="wide-container">
     <app-chart [coordinates]="elevation$ | async"></app-chart>
   </div>
+  <div class="wide-container">
+    <app-indicator-avg [arr]="elevationValues$ | async" name="elevation">
+    </app-indicator-avg>
+  </div>
+  <div class="wide-container">
+    <app-indicator-max [arr]="elevationValues$ | async" name="elevation">
+    </app-indicator-max>
+  </div>
 </div>

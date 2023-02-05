@@ -14,6 +14,9 @@ export class AppComponent {
   @Select(AppState.getElevation) readonly elevation$: Observable<
     { x: number; y: number }[]
   >;
+  @Select(AppState.getElevationValues) readonly elevationValues$: Observable<
+    number[]
+  >;
 
   isLoading$$ = new BehaviorSubject(false);
 

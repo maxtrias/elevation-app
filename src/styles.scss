@@ -73,3 +73,21 @@ $shadow-material: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 
         opacity: .8;
     }
 }
+
+.chart-container {
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: $shadow-material;
+}
+
+.indicator {
+    box-sizing: border-box;
+    width: fit-content;
+    min-width: 22rem;
+    padding: 2rem 1rem;
+    border-radius: 5px;
+    box-shadow: $shadow-material;
+    @include small-screen-only {
+        width: 100%;
+    }
+}

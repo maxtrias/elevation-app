@@ -9,9 +9,11 @@ import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { AppState } from './+state/app.state';
 import { ChartComponent } from './component/chart/chart.component';
+import { IndicatorAvgComponent } from './component/indicator-avg/indicator-avg.component';
+import { IndicatorMaxComponent } from './component/indicator-max/indicator-max.component';
 
 @NgModule({
-  declarations: [AppComponent, ChartComponent],
+  declarations: [AppComponent, ChartComponent, IndicatorAvgComponent, IndicatorMaxComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
