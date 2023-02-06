@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { BehaviorSubject, Observable, take, tap } from 'rxjs';
-import { LoadProfile } from './+state/app.actions';
-import { AppState } from './+state/app.state';
+import { LoadProfile } from './state/app.actions';
+import { AppState } from './state/app.state';
 
 @Component({
   selector: 'app-root',
@@ -14,9 +14,6 @@ export class AppComponent {
   @Select(AppState.getElevation)
   readonly elevation$: Observable<{ x: number; y: number }[]>;
 
-  @Select(AppState.getElevationValues)
-  readonly elevationValues$: Observable<number[]>;
-
   @Select(AppState.getElevationAvg)
   readonly elevationAvg$: Observable<number>;
 
@@ -26,7 +23,7 @@ export class AppComponent {
   readonly isLoading$$ = new BehaviorSubject(false);
   readonly alertMessage$$ = new BehaviorSubject('');
 
-  constructor(private store: Store) {}
+  constructor(private readonly store: Store) {}
 
   requestElevationData() {
     this.isLoading$$.next(true);

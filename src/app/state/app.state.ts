@@ -51,9 +51,7 @@ export class AppState {
       (accumulator, currentValue) => accumulator + currentValue,
       0
     );
-    return values?.length
-      ? Math.round((sum / values.length) * 10000) / 10000
-      : null;
+    return values?.length ? Math.round(sum / values.length) : null;
   }
 
   @Selector([AppState.getElevationValues])
@@ -61,9 +59,7 @@ export class AppState {
     state: AppStateModel,
     values: number[]
   ): number | null {
-    return values?.length
-      ? Math.round(Math.max(...values) * 10000) / 10000
-      : null;
+    return values?.length ? Math.round(Math.max(...values)) : null;
   }
 
   constructor(private api: ApiService) {}

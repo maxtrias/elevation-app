@@ -13,28 +13,12 @@ import { ChartData, ChartOptions } from 'chart.js';
 })
 export class ChartComponent implements OnChanges {
   @Input() coordinates: { x: number; y: number }[] | null = null;
+  @Input() label = 'chart';
+  @Input() labelX = 'x';
+  @Input() labelY = 'y';
 
   chartData: ChartData;
-
-  readonly options: ChartOptions = {
-    responsive: true,
-    scales: {
-      x: {
-        display: true,
-        title: {
-          display: true,
-          text: 'distance',
-        },
-      },
-      y: {
-        display: true,
-        title: {
-          display: true,
-          text: 'elevation',
-        },
-      },
-    },
-  };
+  options: ChartOptions;
 
   ngOnChanges(): void {
     if (this.coordinates) {
@@ -42,7 +26,7 @@ export class ChartComponent implements OnChanges {
         datasets: [
           {
             data: this.coordinates,
-            label: 'Elevation',
+            label: this.label,
             fill: true,
             tension: 0.5,
             showLine: true,
@@ -50,6 +34,25 @@ export class ChartComponent implements OnChanges {
             backgroundColor: 'rgba(46, 46, 255, .3)',
           },
         ],
+      };
+      this.options = {
+        responsive: true,
+        scales: {
+          x: {
+            display: true,
+            title: {
+              display: true,
+              text: this.labelX,
+            },
+          },
+          y: {
+            display: true,
+            title: {
+              display: true,
+              text: this.labelY,
+            },
+          },
+        },
       };
     }
   }

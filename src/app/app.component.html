@@ -13,7 +13,11 @@
     </button>
   </div>
   <div *ngIf="elevation$ | async as elevation" class="wide-container">
-    <app-chart [coordinates]="elevation"></app-chart>
+    <app-chart
+      [coordinates]="elevation"
+      label="Elevation"
+      labelX="distance"
+      labelY="elevation"></app-chart>
   </div>
   <div *ngIf="elevationAvg$ | async as average" class="wide-container">
     <app-indicator title="average elevation" [value]="average"></app-indicator>

@@ -7,7 +7,7 @@ import { NgChartsModule } from 'ng2-charts';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
-import { AppState } from './+state/app.state';
+import { AppState } from './state/app.state';
 import { ChartComponent } from './component/chart/chart.component';
 import { IndicatorComponent } from './component/indicator/indicator.component';
 
