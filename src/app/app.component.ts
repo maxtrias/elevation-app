@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
-import { BehaviorSubject, Observable, take, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { LoadProfile } from './state/app.actions';
 import { AppState } from './state/app.state';
 
@@ -20,28 +20,15 @@ export class AppComponent {
   @Select(AppState.getElevationMax)
   readonly elevationMax$: Observable<number>;
 
-  readonly isLoading$$ = new BehaviorSubject(false);
-  readonly alertMessage$$ = new BehaviorSubject('');
+  @Select(AppState.isLoading)
+  readonly isLoading$: Observable<boolean>;
+
+  @Select(AppState.hasError)
+  readonly hasError$: Observable<boolean>;
 
   constructor(private readonly store: Store) {}
 
   requestElevationData() {
-    this.isLoading$$.next(true);
-    this.alertMessage$$.next('');
-
-    this.store
-      .dispatch(new LoadProfile())
-      .pipe(
-        take(1),
-        tap({
-          next: () => this.isLoading$$.next(false),
-          error: err => {
-            this.alertMessage$$.next('oops... something went wrong');
-            this.isLoading$$.next(false);
-            console.error(err);
-          },
-        })
-      )
-      .subscribe();
+    this.store.dispatch(new LoadProfile());
   }
 }

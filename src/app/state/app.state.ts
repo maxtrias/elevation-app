@@ -1,18 +1,22 @@
 import { Injectable } from '@angular/core';
 import { State, Action, StateContext, Selector } from '@ngxs/store';
-import { tap } from 'rxjs';
+import { catchError, of, tap } from 'rxjs';
 import { ApiService } from '../data-access/api.service';
 import { FeatureSet } from '../model/feature-set';
 import { LoadProfile } from './app.actions';
 
 export interface AppStateModel {
-  profile?: FeatureSet | null;
+  profile: FeatureSet | null;
+  isLoading: boolean;
+  hasError: boolean;
 }
 
 @State<AppStateModel>({
   name: 'app',
   defaults: {
     profile: null,
+    isLoading: false,
+    hasError: false,
   },
 })
 @Injectable({ providedIn: 'root' })
@@ -62,13 +66,29 @@ export class AppState {
     return values?.length ? Math.round(Math.max(...values)) : null;
   }
 
+  @Selector()
+  static isLoading(state: AppStateModel) {
+    return state.isLoading;
+  }
+
+  @Selector()
+  static hasError(state: AppStateModel) {
+    return state.hasError;
+  }
+
   constructor(private api: ApiService) {}
 
   @Action(LoadProfile, { cancelUncompleted: true })
   loadProfile({ patchState }: StateContext<AppStateModel>) {
+    patchState({ isLoading: true, hasError: false });
     return this.api.getData().pipe(
       tap((profile: FeatureSet) => {
-        patchState({ profile });
+        patchState({ profile, isLoading: false });
+      }),
+      catchError(err => {
+        patchState({ isLoading: false, hasError: true });
+        console.error(err);
+        return of(null);
       })
     );
   }

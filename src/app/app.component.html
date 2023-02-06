@@ -3,10 +3,10 @@
     <button
       class="btn"
       (click)="requestElevationData()"
-      [disabled]="isLoading$$ | async">
+      [disabled]="isLoading$ | async">
       <span>
         <ng-template #loading>loading...</ng-template>
-        <ng-container *ngIf="(isLoading$$ | async) !== true; else loading">
+        <ng-container *ngIf="(isLoading$ | async) !== true; else loading">
           request elevation data
         </ng-container>
       </span>
@@ -25,7 +25,7 @@
   <div *ngIf="elevationMax$ | async as max" class="wide-container">
     <app-indicator title="max elevation" [value]="max"></app-indicator>
   </div>
-  <div *ngIf="alertMessage$$ | async as msg" class="alert-message error">
-    <p>{{ msg }}</p>
+  <div *ngIf="hasError$ | async" class="alert-message error">
+    <p>oops... something went wrong</p>
   </div>
 </div>
