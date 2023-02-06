@@ -13,6 +13,7 @@
 
 body {
     min-height: 100vh;
+    padding: 0;
     margin: 0;
     background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);
 }
@@ -92,11 +93,23 @@ $shadow-material: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 
 .indicator {
     box-sizing: border-box;
     width: fit-content;
-    min-width: 22rem;
+    min-width: 16rem;
     padding: 2rem 1rem;
     border-radius: 5px;
     box-shadow: $shadow-material;
     @include small-screen-only {
         width: 100%;
+    }
+}
+
+.alert-message {
+    position: fixed;
+    bottom: 1rem;
+    padding: 1rem 3rem;
+    border-radius: 5px;
+    background: gray;
+    color: white;
+    &.error {
+        background: #fe5f5f;
     }
 }

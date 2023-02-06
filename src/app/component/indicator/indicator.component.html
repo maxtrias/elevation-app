@@ -1,0 +1,7 @@
+<div class="indicator">
+  <p>
+    <strong>{{ title }}: </strong
+    ><ng-container *ngIf="value; else novalue">{{ value }}</ng-container
+    ><ng-template #novalue>-</ng-template>
+  </p>
+</div>

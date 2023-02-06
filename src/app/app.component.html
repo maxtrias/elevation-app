@@ -12,15 +12,16 @@
       </span>
     </button>
   </div>
-  <div class="wide-container">
-    <app-chart [coordinates]="elevation$ | async"></app-chart>
+  <div *ngIf="elevation$ | async as elevation" class="wide-container">
+    <app-chart [coordinates]="elevation"></app-chart>
   </div>
-  <div class="wide-container">
-    <app-indicator-avg [arr]="elevationValues$ | async" name="elevation">
-    </app-indicator-avg>
+  <div *ngIf="elevationAvg$ | async as average" class="wide-container">
+    <app-indicator title="average elevation" [value]="average"></app-indicator>
   </div>
-  <div class="wide-container">
-    <app-indicator-max [arr]="elevationValues$ | async" name="elevation">
-    </app-indicator-max>
+  <div *ngIf="elevationMax$ | async as max" class="wide-container">
+    <app-indicator title="max elevation" [value]="max"></app-indicator>
+  </div>
+  <div *ngIf="alertMessage$$ | async as msg" class="alert-message error">
+    <p>{{ msg }}</p>
   </div>
 </div>

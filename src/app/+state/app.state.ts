@@ -42,6 +42,30 @@ export class AppState {
     return paths?.map((e: [number, number, number, number]) => e[2]);
   }
 
+  @Selector([AppState.getElevationValues])
+  static getElevationAvg(
+    state: AppStateModel,
+    values: number[]
+  ): number | null {
+    const sum = values?.reduce(
+      (accumulator, currentValue) => accumulator + currentValue,
+      0
+    );
+    return values?.length
+      ? Math.round((sum / values.length) * 10000) / 10000
+      : null;
+  }
+
+  @Selector([AppState.getElevationValues])
+  static getElevationMax(
+    state: AppStateModel,
+    values: number[]
+  ): number | null {
+    return values?.length
+      ? Math.round(Math.max(...values) * 10000) / 10000
+      : null;
+  }
+
   constructor(private api: ApiService) {}
 
   @Action(LoadProfile, { cancelUncompleted: true })

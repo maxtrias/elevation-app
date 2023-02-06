@@ -17,12 +17,20 @@ export class AppComponent {
   @Select(AppState.getElevationValues)
   readonly elevationValues$: Observable<number[]>;
 
+  @Select(AppState.getElevationAvg)
+  readonly elevationAvg$: Observable<number>;
+
+  @Select(AppState.getElevationMax)
+  readonly elevationMax$: Observable<number>;
+
   readonly isLoading$$ = new BehaviorSubject(false);
+  readonly alertMessage$$ = new BehaviorSubject('');
 
   constructor(private store: Store) {}
 
   requestElevationData() {
     this.isLoading$$.next(true);
+    this.alertMessage$$.next('');
 
     this.store
       .dispatch(new LoadProfile())
@@ -31,6 +39,7 @@ export class AppComponent {
         tap({
           next: () => this.isLoading$$.next(false),
           error: err => {
+            this.alertMessage$$.next('oops... something went wrong');
             this.isLoading$$.next(false);
             console.error(err);
           },
